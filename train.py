@@ -598,3 +598,8 @@ for step in range(max_steps):
 
 if ddp:
     destroy_process_group()
+
+if int(os.environ['RANK']) == 0:
+    checkpoint_path = "/kaggle/working/20shards_model.pt"
+    torch.save(raw_model.state_dict(), checkpoint_path)
+    print(f"Model saved to {checkpoint_path}")
